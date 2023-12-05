@@ -1,0 +1,48 @@
+<div class="container">
+  <!-- <mat-list>
+    <div mat-subheader class="subheader">Projects</div>
+    @for (project of projects; track $index) {
+    <mat-list-item>
+      <mat-icon class="list-icon" matListItemIcon>{{
+        getRandomIcon()
+      }}</mat-icon>
+      <div matListItemTitle>{{ project.name }}</div>
+      <div matListItemLine>
+        Budget left:
+        {{ project.initialBudget - project.amountSpent | currency }}
+      </div>
+      @if (!$last) {
+      <mat-divider [inset]="true"></mat-divider>
+      }
+    </mat-list-item>
+    } @empty {
+    <div class="not-found">No projects found...</div>
+    }
+  </mat-list> -->
+
+  <h1 class="header">Current projects:</h1>
+
+  <mat-accordion>
+    @for (project of projects; track $index) {
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ project.name }}</mat-panel-title>
+          <mat-panel-description>
+            {{ project.isSpecial ? "Special" : "Normal" }} project
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <p>
+          Budget left:
+          {{ project.initialBudget - project.amountSpent | currency }}
+        </p>
+        <p>Initial Budget: {{ project.initialBudget | currency }}</p>
+        <p>Total spent: {{ project.amountSpent | currency }}</p>
+        <p>Hours worked: {{ project.hoursOfTasks }}</p>
+        @if (project.isSpecial) {
+          <p>Tasks completed: {{ project.numberOfFinishedTasks }}</p>
+        }
+      </mat-expansion-panel>
+    }
+  </mat-accordion>
+</div>

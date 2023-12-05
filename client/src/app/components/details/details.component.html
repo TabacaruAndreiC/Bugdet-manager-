@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="header">Daily details:</h1>
+  <h4>Select day</h4>
+  <mat-form-field>
+    <mat-label>Choose a day</mat-label>
+    <mat-select (selectionChange)="onChange($event.value)">
+      <mat-option>None</mat-option>
+      @for (day of dates; track day) {
+        <mat-option [value]="day">{{
+          day | date: "E - MMM d, yyyy"
+        }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  <router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
+</div>

@@ -1,0 +1,26 @@
+.content {
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 100%;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+p {
+  font-size: 2rem;
+}
+
+mat-icon {
+  transform: scale(4);
+}
+
+button {
+  transform: scale(2);
+}

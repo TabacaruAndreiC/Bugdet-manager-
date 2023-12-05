@@ -1,0 +1,8 @@
+.session-container {
+  gap: 20px;
+}
+
+.session-card {
+  background-color: var(--secondary);
+  width: calc(33.33% - 20px);
+}

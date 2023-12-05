@@ -1,0 +1,49 @@
+<div class="table-responsive scrollable-table">
+  <table class="table table-striped table-dark table-bordered">
+    <thead>
+      <tr>
+        <td rowspan="3">#</td>
+        <td rowspan="3">Name</td>
+        <td rowspan="3">Hourly Rate</td>
+        <td colspan="6">Monday</td>
+        <td colspan="6">Tuesday</td>
+        <td colspan="6">Wednesday</td>
+        <td colspan="6">Thursday</td>
+        <td colspan="6">Friday</td>
+        <td colspan="6">Saturday</td>
+        <td colspan="6">Sunday</td>
+        <td rowspan="3">Total Hours</td>
+        <td rowspan="3">Amount earned</td>
+        <td rowspan="3">Make Payment</td>
+      </tr>
+      <tr>
+        @for (day of week; track $index) {
+          <td colspan="6">{{ day | date }}</td>
+        }
+      </tr>
+      <tr>
+        @for (day of week; track $index) {
+          @for (i of [1, 2]; track $index) {
+            <td>Hrs</td>
+            <td>Task</td>
+            <td>Project</td>
+          }
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (entry of separatedArrays; track $index) {
+        <tr
+          app-row
+          [workSessions]="entry"
+          [week]="week"
+          [rowIndex]="$index"
+          [moneyEarned]="getSalary(entry)"
+          [isPaid]="isRowPaid($index)"
+          (buttonPressEvent)="paySalary($event)"
+          [class.table-success]="isRowPaid($index)"
+        ></tr>
+      }
+    </tbody>
+  </table>
+</div>

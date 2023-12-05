@@ -1,0 +1,36 @@
+<div
+  class="container-lg d-flex flex-column justify-content-center align-items-center gap-lg-5"
+>
+  <div class="import-button">
+    <div
+      class="file-drop"
+      [class.drag-over]="isFileOver"
+      (drop)="onFileDropped($event)"
+      (dragover)="onDragOver($event)"
+      (dragenter)="onDragEnter($event)"
+      (dragleave)="onDragLeave($event)"
+      (click)="fileInput.click()"
+    >
+      <p>Drag & Drop your json file here</p>
+      <p>or</p>
+      <p>
+        <mat-icon fontIcon="cloud_upload"></mat-icon> click to select a file
+      </p>
+    </div>
+    <input
+      type="file"
+      #fileInput
+      (change)="onFileSelected(fileInput)"
+      style="display: none"
+      accept="application/json"
+    />
+  </div>
+  @if (isLoading) {
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  @if (fileUploaded) {
+    <app-display-table
+      (salaryPaidEvent)="showSalarySnackbar($event)"
+    ></app-display-table>
+  }
+</div>

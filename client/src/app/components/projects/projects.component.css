@@ -1,0 +1,17 @@
+/* .subheader {
+  color: var(--primary);
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.mat-mdc-list-item-icon {
+  color: var(--secondary);
+} */
+
+.header {
+  color: var(--primary);
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}

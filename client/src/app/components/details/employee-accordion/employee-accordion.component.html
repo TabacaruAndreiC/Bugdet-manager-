@@ -1,0 +1,42 @@
+<mat-accordion>
+  @for (employee of getUniqueEmployees(); track $index) {
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title
+          >{{ employee.firstName }} {{ employee.lastName }}</mat-panel-title
+        >
+        <mat-panel-description>
+          {{ getEmployeeWorkSessions(employee).length }}
+          {{
+            getEmployeeWorkSessions(employee).length === 1
+              ? "session"
+              : "sessions"
+          }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="d-flex flex-wrap session-container">
+        @for (session of getEmployeeWorkSessions(employee); track $index) {
+          <mat-card class="session-card">
+            <mat-card-header>
+              <mat-card-subtitle
+                >{{ session.firstName }}
+                {{ session.lastName }}</mat-card-subtitle
+              >
+              <mat-card-title> Work Session {{ $index + 1 }} </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Task worked on: {{ session.taskName }}</p>
+              <p>
+                Project: {{ session.projectName }} ({{
+                  workedOnSpecialProject(session) ? "special" : "normal"
+                }}
+                project)
+              </p>
+              <p>Hours worked on task: {{ session.hoursWorked }}</p>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+    </mat-expansion-panel>
+  }
+</mat-accordion>

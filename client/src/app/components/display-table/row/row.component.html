@@ -1,0 +1,49 @@
+<td>{{ rowIndex + 1 }}</td>
+<td>{{ workSessions[0].firstName }} {{ workSessions[0].lastName }}</td>
+<td>{{ workSessions[0].hourRate }}</td>
+@for (day of week; track $index) {
+  @for (session of sessionsInDay(workSessions, day); track $index) {
+    <td>
+      @for (task of session.tasks; track $index) {
+        <div>{{ task.hoursWorked }}</div>
+        @if (!$last) {
+          <mat-divider></mat-divider>
+        }
+      }
+    </td>
+    <td>
+      @for (task of session.tasks; track $index) {
+        <div>{{ task.taskName }}</div>
+        @if (!$last) {
+          <mat-divider></mat-divider>
+        }
+      }
+    </td>
+    <td>{{ session.projectName }}</td>
+  }
+  <!-- Add empty cells if there are not enough sessions in that day -->
+  @for (i of [].constructor(maxProjectsPerDay); track $index) {
+    @if (projectsInDay(workSessions, day).length < $index) {
+      @for (i of [1, 2, 3]; track $index) {
+        <td></td>
+      }
+    }
+  }
+}
+<td>{{ workSessions[0].hoursWorkedTotal }}</td>
+<td>{{ moneyEarned | currency }}</td>
+<td>
+  <div class="d-flex align-items-center justify-content-center">
+    @if (!isPaid) {
+      @if (isLoading) {
+        <mat-spinner color="accent" diameter="45"></mat-spinner>
+      } @else {
+        <button mat-stroked-button color="accent" (click)="onButtonPress()">
+          Pay
+        </button>
+      }
+    } @else {
+      <mat-icon fontIcon="check"></mat-icon>
+    }
+  </div>
+</td>
